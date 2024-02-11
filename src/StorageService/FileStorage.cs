@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using StorageService.Events;
 
 namespace StorageService
@@ -9,13 +10,13 @@ namespace StorageService
         private readonly ILogger<FileStorage> logger;
         static readonly SemaphoreSlim semaphore = new SemaphoreSlim(1, 1);
 
-        public FileStorage(string filePath, ILogger<FileStorage> logger)
+        public FileStorage(IConfiguration configuration, ILogger<FileStorage> logger)
         {
-            this.filePath = filePath;
+            this.filePath = configuration["FilePath"]!;
             this.logger = logger;
         }
 
-        public async Task SaveAsync(EmailReadEvent @event, CancellationToken cancellationToken)
+        public virtual async Task SaveAsync(EmailReadEvent @event, CancellationToken cancellationToken)
         {
             await semaphore.WaitAsync(cancellationToken);
 

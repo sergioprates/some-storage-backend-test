@@ -4,7 +4,7 @@ using PixelApi.Storages;
 using PixelApiTests.Configurations;
 using StorageService.Events;
 
-namespace PixelApiTests
+namespace PixelApiTests.Visitors
 {
     public class VisitorServiceTests : BaseTest
     {
@@ -13,7 +13,7 @@ namespace PixelApiTests
         {
             var emailReadEvent = new EmailReadEvent();
             // Act
-            await AutoMock.CreateInstance<VisitorsService>().SaveVisitorInfoAsync(emailReadEvent, default(CancellationToken));
+            await AutoMock.CreateInstance<VisitorsService>().SaveVisitorInfoAsync(emailReadEvent, default);
 
             // Assert
             AutoMock.GetMock<IPublishEndpoint>().Verify(x => x.Publish(emailReadEvent, It.IsAny<CancellationToken>()), Times.Once);

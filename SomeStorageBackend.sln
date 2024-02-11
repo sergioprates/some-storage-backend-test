@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StorageService", "src\Stora
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PixelApiTests", "tests\PixelApiTests\PixelApiTests.csproj", "{DB6F2D64-DDA1-4977-B52E-4673F1322F78}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StorageServiceTests", "StorageServiceTests\StorageServiceTests.csproj", "{1886BE82-766D-4257-9E5B-7C54CAC6BEA3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{DB6F2D64-DDA1-4977-B52E-4673F1322F78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB6F2D64-DDA1-4977-B52E-4673F1322F78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB6F2D64-DDA1-4977-B52E-4673F1322F78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1886BE82-766D-4257-9E5B-7C54CAC6BEA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1886BE82-766D-4257-9E5B-7C54CAC6BEA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1886BE82-766D-4257-9E5B-7C54CAC6BEA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1886BE82-766D-4257-9E5B-7C54CAC6BEA3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,6 +45,7 @@ Global
 		{8C414891-C12E-4AC6-9A8F-FDBB95E340AB} = {B707A1A1-6963-4564-A7D1-EA5CB3DFF7E1}
 		{02964F68-B11F-44D5-9E0D-774F18FBB306} = {B707A1A1-6963-4564-A7D1-EA5CB3DFF7E1}
 		{DB6F2D64-DDA1-4977-B52E-4673F1322F78} = {15824186-EFC2-4F0A-A7C2-534BBC6AEEB2}
+		{1886BE82-766D-4257-9E5B-7C54CAC6BEA3} = {15824186-EFC2-4F0A-A7C2-534BBC6AEEB2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ECFFAB6B-9248-44C8-99B2-E6E401B144FC}

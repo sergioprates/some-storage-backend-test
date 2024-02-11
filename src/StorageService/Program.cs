@@ -1,8 +1,6 @@
 ﻿using MassTransit;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using StorageService;
 using StorageService.Handlers;
 
@@ -18,8 +16,7 @@ public class Program
             .ConfigureServices((hostContext, services) =>
             {
                 services.AddHostedService<ConsumerBackgroundService>();
-                services.AddSingleton(x=> new FileStorage(x.GetRequiredService<IConfiguration>()["FilePath"]!,
-                    x.GetRequiredService<ILogger<FileStorage>>()));
+                services.AddSingleton<FileStorage>();
 
                 services.AddMassTransit(x =>
                 {
