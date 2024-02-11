@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\PixelApi\PixelApi.csproj" />
+    <ProjectReference Include="..\..\src\PixelApi\PixelApi.csproj" />
   </ItemGroup>
 
 </Project>

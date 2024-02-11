@@ -29,7 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\StorageService\StorageService.csproj" />
+    <ProjectReference Include="..\..\src\StorageService\StorageService.csproj" />
   </ItemGroup>
 
 </Project>
