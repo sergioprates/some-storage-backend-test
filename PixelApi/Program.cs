@@ -1,4 +1,5 @@
 using MassTransit;
+using PixelApi.Infrastructure;
 using PixelApi.Storages;
 using StorageService.Events;
 
@@ -7,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<VisitorsService>();
+builder.Services.AddScoped<RequestContext>();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddMassTransit(x =>
 {
@@ -22,21 +25,33 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapGet("/track", async (HttpContext context, VisitorsService storageService, CancellationToken cancellationToken) =>
+app.MapGet("/track", async (HttpContext context, RequestContext requestContext, VisitorsService storageService, ILogger<Program> logger, CancellationToken cancellationToken) =>
 {
-    var referrer = context.Request.Headers["Referer"].ToString();
-    var userAgent = context.Request.Headers["User-Agent"].ToString();
-    var ipAddress = context.Connection.RemoteIpAddress?.ToString();
+    const string imagePixel = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==";
 
-    await storageService.SaveVisitorInfoAsync(new EmailReadEvent
+    try
     {
-        Referrer = referrer,
-        UserAgent = userAgent,
-        IPAddress = ipAddress
-    }, cancellationToken);
+        var referrer = requestContext.Referer;
+        var userAgent = requestContext.UserAgent;
+        var ipAddress = requestContext.IpAddress;
 
-    context.Response.ContentType = "image/gif";
-    await context.Response.WriteAsync("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==");
+        await storageService.SaveVisitorInfoAsync(new EmailReadEvent
+        {
+            Referrer = referrer,
+            UserAgent = userAgent,
+            IPAddress = ipAddress
+        }, cancellationToken);
+
+        context.Response.ContentType = "image/gif";
+        await context.Response.WriteAsync(imagePixel);
+    }
+    catch (Exception e)
+    {
+        logger.LogError(e, "Something went wrong.");
+
+        context.Response.ContentType = "image/gif";
+        await context.Response.WriteAsync(imagePixel);
+    }
 })
 .WithOpenApi();
 
